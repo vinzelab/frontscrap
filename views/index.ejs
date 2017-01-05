@@ -1,0 +1,127 @@
+
+<%- include partials/header.ejs %>
+<div class="title-page">
+  <h2>Aperçu des dernières extractions</h2>
+</div>
+<div class="tools-table">
+  <form method="POST" action="/getextraction" class="navbaritem" >
+    <button type="submit" class="btn btn-default">télécharger l'extraction</button>
+  </form>
+  <input type="text" class="search form-control navbaritem pull-right" placeholder="Recherche">
+  <span class="counter pull-right"></span>
+</div>
+  <div class="tools-table">
+    <form action="/getchecked" method="post">
+    <button type="submit" id="extract-select" class="btn btn-default navbaritem">télécharger la sélection<span class="badge"></span></button>
+    <p class="countline pull-right"></p>
+    </form>
+  </div>
+
+  <div class="table-sm table-responsive">
+    <table class="table table-hover results">
+      <thead class="thead-default">
+        <tr>
+          <th>sélectionner</th>
+          <th>référence</th>
+          <th>modèle</th>
+          <th>marque</th>
+          <th>prix</th>
+          <th>km</th>
+          <th>Année</th>
+          <th>Puissance</th>
+          <th>Carburant</th>
+          <th>CP</th>
+          <th>ville</th>
+          <!-- <th>Téléphone</th> -->
+          <th>site</th>
+          <th>Date export</th>
+          <th>Lien</th>
+        </tr>
+        <tr class="search-row">
+          <td><input id="checkAll" type="checkbox" value=""></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr class="warning no-result">
+          <td colspan="15"><i class="fa fa-warning"></i> Pas de résultats</td>
+        </tr>
+        <%for(var i = 0 ; i < jsondb.tableau.length ; i++) {%>
+          <tr class='clickable-row' data-href="<%=jsondb.tableau[i].url%>">
+            <td><input type="checkbox" name="<%= jsondb.tableau[i].ref%>"></td>
+            <td><%= jsondb.tableau[i].ref%></td>
+            <td><%= jsondb.tableau[i].marque%></td>
+            <td><%= jsondb.tableau[i].type%></td>
+            <td class="price"><%= jsondb.tableau[i].price%> €</td>
+            <td><%= jsondb.tableau[i].km%> km</td>
+            <td><%= jsondb.tableau[i].year%></td>
+            <td><%= jsondb.tableau[i].power%></td>
+            <td><%= jsondb.tableau[i].fuel%></td>
+            <td><%= jsondb.tableau[i].cp%></td>
+            <td><%= jsondb.tableau[i].city%></td>
+            <!-- <td><%# if((jsondb.tableau[i].phone).substring(0,4)=="http") { %>
+              <img class="phone-img" src='
+              <%#=jsondb.tableau[i].phone %>
+              '/>
+              <%# } else{ %>
+                <p><%=jsondb.tableau[i].phone%></p>
+                <%# } %>
+              </td> -->
+              <td><%= jsondb.tableau[i].site%></td>
+              <td><%= jsondb.tableau[i].dateScrap%></td>
+              <td><a class="ion-log-in" target="_blank" href="<%= jsondb.tableau[i].url%>"></a></td>
+            </tr>
+            <%}%>
+          </tbody>
+        </table>
+      </div>
+    </form>
+
+    <div class="pagination-number">
+      <% if (pageInfo.pageCount > 1) { %>
+<ul class="pagination">
+  <% if (pageInfo.currentPage > 1) { %>
+      <li><a href="/?page=1">&laquo;</a></li>
+  <% } %>
+  <% var i = 1;
+  if (pageInfo.currentPage > 5) {
+  i = +pageInfo.currentPage - 4;
+  } %>
+  <% if (i !== 1) { %>
+      <li class="disabled"><a href="#">...</a></li>
+  <% } %>
+  <% for (i; i<=pageInfo.pageCount; i++) { %>
+    <% if (pageInfo.currentPage == i) { %>
+        <li class="active"><span><%= i %> <span class="sr-only">(current)</span></span></li>
+    <% } else { %>
+        <li><a href="/?page=<%= i %>"><%= i %></a></li>
+    <% } %>
+    <% if (i == (+pageInfo.currentPage + 4)) { %>
+        <li class="disabled"><a href="#">...</a></li>
+    <% break; } %>
+  <% } %>
+  <% if (pageInfo.currentPage != pageInfo.pageCount) { %>
+      <li><a href="/?page=<%= pageInfo.pageCount %>">&raquo;</a></li>
+  <% } %>
+</ul>
+<% } %>
+    </div>
+
+  </body>
+  <script   src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script   src="http://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+  </html>

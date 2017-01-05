@@ -1,0 +1,34 @@
+<%- include partials/header.ejs %>
+<div class="container">
+<div class="title-page">
+    <h2>Paramétrage des filtres de scraping</h2>
+</div>
+<div class="form-setting">
+<form action="/settings/getvalues" method="POST">
+<div class="form-group">
+  <label for="year-scraping">Mise en circulation des véhicules depuis</label>
+  <select class="form-control" class="selectpickeryear" name="selectpickeryear">
+    <%for(var i=0;i<dropdownyear.length;i++){%>
+    <option><%= dropdownyear[i];%></option>
+    <%}%>
+  </select>
+</div>
+<div class="form-group">
+  <label for="km-scraping">Km du véhicule inférieur à</label>
+  <select class="form-control" class="selectpickerkm" name="selectpickerkm">
+    <%for(var j=1;j<dropdownkm.length;j++){%>
+      <option><%= dropdownkm[j]%> </option>
+      <%}%>
+  </select>
+</div>
+<button type="submit" class="btn btn-default">Sauvegarder</button>
+<div class="password-forgot"><p>Les nouveaux paramétres de recherche seront pris en compte à partir du lendemain matin</p></div>
+</form>
+</div>
+</div>
+</body>
+
+<script src="js/main.js"></script>
+
+
+</html>

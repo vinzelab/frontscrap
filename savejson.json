@@ -1,0 +1,5 @@
+{
+  "obj":
+  [{"ref":"x","info":"voiture x"},{"ref":"y","info":"voiture y"},{"ref":"z","info":"voiture z"}]
+}
+[{"ref":"j","info":"voiture j"},{"ref":"h","info":"voiture h"},{"ref":"g","info":"voiture g"},{"ref":"f","info":"voiture f"},{"ref":"e","info":"voiture e"},{"ref":"b","info":"voiture b"},{"ref":"a","info":"voiture a"},{"ref":"x","info":"voiture x"},{"ref":"y","info":"voiture y"},{"ref":"z","info":"voiture z"}]
